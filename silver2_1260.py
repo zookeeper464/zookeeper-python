@@ -6,3 +6,4 @@ for i in range(M):
   M_list.append([a,b])
   M_list.append([b,a])
 M_list.sort()
+
