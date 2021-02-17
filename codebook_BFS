@@ -1,0 +1,17 @@
+def bfs(graph,start,visited):
+  visited[start]=True
+  v_list=[1]
+  count=0
+  while v_list!=[]:
+    v=v_list[0]
+    del v_list[0]
+    print(v, end=" ")
+    for i in graph[v]:
+      if not visited[i]:
+        v_list.append(i)
+        visited[i]=True
+        count+=1
+
+gragh=[[],[2,3,8],[1,7],[1,4,5],[3,5],[3,4],[7],[1,6,8],[1,7]]
+visited=[False]*9
+bfs(gragh,1,visited)
