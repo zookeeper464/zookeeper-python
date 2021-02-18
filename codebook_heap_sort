@@ -1,0 +1,33 @@
+#heap sort 연습
+
+def heapify(unsorted, index, heap_size):
+  largest=index
+  l_index=2*index+1
+  r_index=2*index+2
+#3개 인덱스로 구조 1개 설정
+  if l_index<heap_size and unsorted[l_index]>unsorted[largest]:
+    largest=l_index
+
+  if r_index<heap_size and unsorted[r_index]>unsorted[largest]:
+    largest=r_index
+  
+#3개 인덱스에 들어가있는 값중 가장 큰 값이 위로 올라감 아래 신경 x
+  if largest!=index:
+    unsorted[largest], unsorted[index] = unsorted[index], unsorted[largest]
+    heapify(unsorted, largest, heap_size)
+#변경 사항이 있다면 가장 큰 수가 있는 인덱스와 위에 인덱스를 바꾼다.
+# 다시 그 아래로 이어서 진행
+
+def heap_sort(unsorted):
+  n=len(unsorted)
+  for i in range(n//2-1, -1,-1):
+    heapify(unsorted,i,n)
+#unsorted를 모두 정렬(큰수를 위로)  
+  for i in range(n-1,0,-1):
+    unsorted[0],unsorted[i]=unsorted[i],unsorted[0]
+    heapify(unsorted,0,i)
+    #unsorted의 순서를 반대로 이동+힙구조 유지
+  return unsorted
+
+a = [7,2,9,4,3,8,6,1]
+print(heap_sort(a))
