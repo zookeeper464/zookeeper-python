@@ -1,0 +1,22 @@
+#merge_sort 연습
+
+a=[7,2,3,4,8,1,9,6]
+n=len(a)
+M=n//2
+l_list=a[:M]
+r_list=a[M:]
+l_list.sort()
+r_list.sort()
+lst=[]
+i,j=0,0
+
+while i<M and j<n-M:
+  if l_list[i]>r_list[j]:
+    lst.append(r_list[j])
+    j+=1
+  elif l_list[i]<r_list[j]:
+    lst.append(l_list[i])
+    i+=1
+
+lst=lst+r_list[j:]+l_list[i:]
+print(lst)
