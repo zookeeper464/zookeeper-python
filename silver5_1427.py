@@ -1,7 +1,7 @@
-val=input()
-
-list_val=list(val)
-list_val.sort()
-list_val=list_val[::-1]
-val="".join(list_val)
-print(val)
+N=input()
+N_list=list(N)
+N=list(map(int,N_list))
+N.sort(reverse=True)
+for i in N:
+  print(i, end="")
+print("\n")
