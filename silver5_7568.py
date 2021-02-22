@@ -1,17 +1,12 @@
 N=int(input())
-val_list=[]
+lst=[]
 for i in range(N):
-  weight, height=map(int,input().split())
-  val_list.append([weight,height])
-rank=N
+  a,b=map(int,input().split())
+  lst.append([a,b])
 
-
-def compare(val_list):
-  for i in range(N):
-    rank=1
-    for j in range(N):
-      if val_list[i][0]<val_list[j][0] and val_list[i][1]<val_list[j][1]:
-        rank+=1
-    print(rank, end=" ")
-
-compare(val_list)
+for i in range(N):
+  rank=1
+  for j in range(N):
+    if lst[i][0]<lst[j][0] and lst[i][1]<lst[j][1]:
+      rank+=1
+  print(rank, end=" ")
