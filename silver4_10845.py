@@ -1,3 +1,4 @@
+  
 N=int(input())
 used_list=[]
 val_list=[]
@@ -8,7 +9,8 @@ for i in range(N):
 
 for i in used_list:
   if "push" in i:
-    val_list.append(i[-1])
+    i=i.split()
+    val_list.append(str(i[-1]))
   elif "back" in i:
     if val_list:
       print(val_list[-1])
