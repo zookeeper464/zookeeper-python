@@ -1,30 +1,38 @@
+def form (put):
+  global val_list, used_list
+  if "push" in put:
+    put=put.split()
+    val_list.append(str(put[-1]))
+
+  elif put=="pop":
+    if val_list==[]:
+      used_list.append(-1)
+    else:
+      used_list.append(val_list.pop())
+  
+  elif put=="size":
+    used_list.append(len(val_list))
+
+  elif put=="empty":
+    if val_list==[]:
+      used_list.append(1)
+    else:
+      used_list.append(0)
+
+  elif put=="top":
+    if val_list==[]:
+      used_list.append(-1)
+    else:
+      used_list.append(val_list[-1])
+
+
 N=int(input())
 used_list=[]
 val_list=[]
 
 for i in range(N):
   a=input()
-  used_list.append(a)
+  form(a)
 
 for i in used_list:
-  if "push" in i:
-    val_list.append(i[-1])
-  elif "top" in i:
-    if val_list:
-      print(val_list[-1])
-    else:
-      print(-1)
-  elif "size" in i:
-    print(len(val_list))
-  elif "empty" in i:
-    if val_list:
-      print(0)
-    else:
-      print(1)
-  elif "pop" in i:
-    if val_list:
-      print(val_list.pop())
-    else:
-      print(-1)
-  else:
-    print("ERROR")
+  print(i)
