@@ -1,22 +1,22 @@
 N=int(input())
 location_list=[]
 
-def checker(lists):
+def dist(lists):
   a=(lists[0]-lists[3])**2
   b=(lists[1]-lists[4])**2
-  c=(lists[2]+lists[5])**2
-  d=(lists[2]-lists[5])**2
-  return [a+b-c,d-a-b]
+  return (a+b)**(1/2)
 
 for i in range(N):
-  temp=input().split()[:6]
-  temp=list(map(int,temp))
+  temp=list(map(int,input().split()))[:6]
   location_list.append(temp)
 
 for i in location_list:
-  if checker(i)[0]<0 and checker(i)[1]<0:
+  a,b=max(i[2],i[5]),min(i[2],i[5])
+  if dist(i)==0 and a==b:
+    print(-1)
+  elif dist(i)<a+b and dist(i)>a-b:
     print(2)
-  elif checker(i)[0]*checker(i)[1]==0:
+  elif dist(i)==a+b or dist(i)==a-b:
     print(1)
-  else:
+  elif dist(i)>a+b or dist(i)<a-b:
     print(0)
