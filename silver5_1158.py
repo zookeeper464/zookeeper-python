@@ -1,13 +1,20 @@
+import sys
+input=sys.stdin.readline
+
 N,K=map(int,input().split())
 val_list=list(range(1,N+1))
 result_list=[]
 
+a=val_list.index(K)
+for i in range(N):
+  result_list.append(str(val_list[a]))
+  del val_list[a]
+  n=len(val_list)
+  if n!=0:
+    a=(a+K-1)%n
+  else:
+    a=0
+
 print("<", end="")
-temp=-1
-result=0
-for i in list(range(1,N)):
-  temp+=K
-  temp=temp%N
-  result=val_list[temp]
-  print(result, end=", ")
-print(f"{val_list[-1]}>")
+print(", ".join(result_list), end="")
+print(">")
