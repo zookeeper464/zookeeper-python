@@ -1,14 +1,19 @@
 M=int(input())
 N=int(input())
-factor_list=[]
 
-if M<=N:
-  for i in range(M,N+1):
-    count=0
-    for j in range(1,i+1):
-      if i%j==0:
-        count+=1
-    if count==2:
-      factor_list.append(i)
-print(sum(factor_list))
-print(min(factor_list))
+num1=0
+num2=0
+for i in range(M,N+1):
+  count=0
+  for j in range(2,min(100,i)):
+    if i%j==0:
+      count+=1
+  if count==0 and i!=1:
+    if num1==0:
+      num2=i
+    num1+=i
+if num1==0:
+  print(-1)
+else:
+  print(num1)
+  print(num2)
