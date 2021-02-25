@@ -12,4 +12,4 @@ except:
 for i in range(3,N+1):
   result_list[i]=result_list[i-1]+result_list[i-2]
 
-print(result_list[N])
+print(result_list[N]%10007)
