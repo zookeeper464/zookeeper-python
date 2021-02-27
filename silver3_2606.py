@@ -1,17 +1,26 @@
-N=int(input())
-M=int(input())
-vir_list=[]
-for i in range(M):
-  a,b=map(int,input().split())
-  [a,b].sort()
-  vir_list.append([a,b])
-vir_list.sort()
-count=set([1])
+v=int(input())
+e=int(input())
+e_lst=[]
+for i in range(e):
+  a=list(map(int,input().split()))
+  e_lst.append(a)
 
-for i in vir_list:
-  i=set(i)
-  if i&count!=set():
-    count=i|count
 
-length=len(count)-1
-print(length)
+lst2=[1]
+
+while True:
+  lst1=[]
+  lst3=[]
+  for i in e_lst:
+    for j in lst2:
+      if j in i:
+        lst1=lst1+i
+        
+  for i in lst1:
+    if i not in lst2:
+      lst2.append(i)
+      lst3.append(i)
+  if lst3==[]:
+    break
+
+print(len(lst2)-1)
