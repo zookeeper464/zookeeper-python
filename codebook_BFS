@@ -1,26 +1,17 @@
-v=int(input())
-e=int(input())
-e_lst=[]
-for i in range(e):
-  a=list(map(int,input().split()))
-  e_lst.append(a)
+def bfs(graph,start,visited):
+  visited[start]=True
+  v_list=[1]
+  count=0
+  while v_list!=[]:
+    v=v_list[0]
+    del v_list[0]
+    print(v, end=" ")
+    for i in graph[v]:
+      if not visited[i]:
+        v_list.append(i)
+        visited[i]=True
+        count+=1
 
-
-lst2=[1]
-
-while True:
-  lst1=[]
-  lst3=[]
-  for i in e_lst:
-    for j in lst2:
-      if j in i:
-        lst1=lst1+i
-        
-  for i in lst1:
-    if i not in lst2:
-      lst2.append(i)
-      lst3.append(i)
-  if lst3==[]:
-    break
-
-print(len(lst2)-1)
+gragh=[[],[2,3,8],[1,7],[1,4,5],[3,5],[3,4],[7],[1,6,8],[1,7]]
+visited=[False]*9
+bfs(gragh,1,visited)
