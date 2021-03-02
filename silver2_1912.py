@@ -1,15 +1,18 @@
-n=int(input())
-a=list(map(int,input().split()))[:n]
-val_list=[]
+N=int(input())
+lst=list(map(int,input().split()))
+sol=[]
+for i in range(N):
+  sol.append(0)
 
-def sum(N,M):
-  global a
-  temp=0
-  for i in range(N,M+1):
-    temp+=a[i]
-  val_list.append(temp)
-
-for i in range(n):
-  for j in range(i,n):
-    sum(i,j)
-print(max(val_list))
+def checker(sol,lst,i,N):
+  if i==0:
+    sol[i]=lst[i]
+  else:
+    if sol[i-1]>0:
+      sol[i]=sol[i-1]+lst[i]
+    else:
+      sol[i]=lst[i]
+for i in range(N):
+  checker(sol,lst,i,N)
+  
+print(max(sol))
