@@ -1,27 +1,17 @@
-count=0
-n=int(input())
-val_list=[]
-for i in range(n):
+N=int(input())
+lst=[]
+for i in range(N):
   a,b=map(int,input().split())
-  val_list.append([a,b])
-val_list.sort()
-temp_list=val_list
-for i in temp_list:
-  for j in temp_list:
-    if i[0]<=j[0] and i[1]>j[1] and i in val_list:
-      val_list.remove(i)
+  lst.append([a,b])
+count=0
 
-while 1:
-  temp_list=[]
-  for i in val_list:
-    temp_list.append(i[1])
-  a=min(temp_list)
-  count+=1
-  temp_list=val_list[:]
-  for i in temp_list:
-    if i[0]<a:
-      val_list.remove(i)
-  if val_list==[]:
-    break
+lst.sort(key=lambda x : [x[1], x[0]])
+
+temp=0
+for i in lst:
+  if i[0]>=temp:
+    count+=1
+    temp=i[1]
+
 
 print(count)
