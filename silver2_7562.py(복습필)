@@ -1,0 +1,33 @@
+from collections import deque
+
+def BFS (a,b,c,d,I):
+  global chess
+  dx=[-2,-2,-1,-1,1,1,2,2]
+  dy=[1,-1,2,-2,2,-2,1,-1]
+  q=deque()
+  q.append([a,b])
+  chess[a][b]=1
+  while q:
+    i,j=q.popleft()
+    if i==c and j==d:
+      return chess[c][d]-1
+
+    for k in range(8):
+      x = i + dx[k]
+      y = j + dy[k]
+      if 0<=x<I and 0<=y<I and chess[x][y]==0:
+        q.append([x, y])
+        chess[x][y] = chess[i][j] + 1
+
+answer=[]
+N=int(input())
+for i in range(N):
+  I=int(input())
+  a,b=list(map(int,input().split()))
+  c,d=list(map(int,input().split()))
+  chess=[[0]*I for i in range(I)]
+  answer.append(BFS(a,b,c,d,I))
+  
+
+for i in answer:
+  print(i)
