@@ -1,56 +1,28 @@
-def checker (n):
-  global count
-  for i in range(n+1,2*n+1):
-    temp=0
-    for j in range(1,i):
-      if i%j==0:
-        temp+=1
-    if temp==1:
-      count+=1
+import math
 
-val_list=[]
-T=1
-while T>0 and T<=123456:
-  T=int(input())
-  val_list.append(T)
-  if T==0:
+lst=[]
+while True:
+  N=int(input())
+  if N==0:
     break
+  lst.append(N)
 
-count=0
-for i in val_list:
-  checker(i)
-
-print(count)
-
-"""
-def checker (n):
-  global p_list
-  for i in range(2*n+1):
-    temp=0
-    for j in range(2,i):
-      if i%j==0:
-        temp+=1
-    if temp==0:
-      p_list.append(i)
-      
-p_list=[]
-val_list=[]
-T=1
-while T>0 and T<=123456:
-  T=int(input())
-  if T==0:
-    max_val=max(val_list)
-    break
-  else:
-    val_list.append(T)
-checker(max_val)
-
-
-for i in val_list:
+M=max(lst)
+p_lst=[]
+for i in range(2,2*M+1):
   count=0
-  for j in p_list:
+  for j in range(2,int(math.sqrt(i))+1):
+    if i%j==0:
+      count+=1
+      break
+  if count==0:
+    p_lst.append(i)
+
+for i in lst:
+  count=0
+  for j in p_lst:
     if j>i and j<=2*i:
       count+=1
+    elif j>2*i:
+      break
   print(count)
-
-"""
