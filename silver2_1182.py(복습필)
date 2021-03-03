@@ -1,0 +1,17 @@
+N,S=map(int,input().split())
+lst=list(map(int,input().split()))
+count=0
+
+def DFS(lst,i,plus):
+  global count
+  if i>=N:
+    return
+  plus+=lst[i]
+  if plus==S:
+    count+=1
+  DFS(lst,i+1,plus)
+  DFS(lst,i+1,plus-lst[i])
+
+DFS(lst,0,0)
+
+print(count)
