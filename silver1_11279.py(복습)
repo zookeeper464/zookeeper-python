@@ -1,0 +1,17 @@
+import heapq
+
+N=int(input())
+heap=[]
+answer=[]
+for i in range(N):
+  a=int(input())
+  if a>0:
+    heapq.heappush(heap,-a)
+  elif a==0:
+    if heap:
+      answer.append(-heapq.heappop(heap))
+    else:
+      answer.append(0)
+
+for i in answer:
+  print(i)
