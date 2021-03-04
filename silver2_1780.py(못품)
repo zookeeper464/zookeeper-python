@@ -1,0 +1,43 @@
+import sys
+
+def first (lst):
+  length=len(lst)
+  a=lst[0][0]
+  for i in range(length):
+    for j in range(length):
+      if a!=lst[i][j]:
+        return False
+  return True
+
+def checker (lst):
+  global answer
+  if first(lst):
+    answer[lst[0][0]+1]+=1
+    return True
+  
+  else:
+    length=len(lst)//3
+    temp=[]
+    for i in range(3):
+      start_c=i*length
+      end_c=(i+1)*length
+      for j in range(3):
+        start_r=j*length
+        end_r=(j+1)*length
+        new_lst=lst[start_c:end_c]
+        for k in new_lst:
+          temp.append(k[start_r:end_r])
+        checker(temp)
+        temp=[]
+#####################
+N=int(input())
+lst=[]
+answer=[0,0,0]
+for i in range(N):
+  ls=list(map(int,sys.stdin.readline().split()))
+  lst.append(ls)
+##################
+checker(lst)
+###################
+for i in answer:
+  print(i)
