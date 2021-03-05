@@ -1,0 +1,29 @@
+import sys
+input=sys.stdin.readline
+
+N=int(input())
+lst=[]
+for i in range(N):
+  ls=list(map(int, input().split()))
+  lt=[-1]*N
+  lst.append(ls)
+visited=[]
+answer=2**31
+
+def dfs (start, daum, value,visited):
+  global answer
+
+  if len(visited)==N:
+    if lst[daum][start]!=0:
+      answer=min(answer,value+lst[daum][start])
+    return
+
+  for i in range(N):
+    if lst[daum][i]!=0 and i!=start and i not in visited:
+      visited.append(i)
+      dfs(start,i,value+lst[daum][i],visited)
+      visited=visited[:-1]
+  
+for i in range(N):
+  dfs(i,i,0,[i])
+print(answer)
