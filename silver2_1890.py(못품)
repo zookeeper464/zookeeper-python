@@ -1,0 +1,29 @@
+import sys
+input=sys.stdin.readline
+
+N=int(input())
+lst=[]
+times=[]
+for i in range(N):
+  ls=list(map(int, input().split()))
+  lt=[-1]*N
+  lst.append(ls)
+  times.append(lt)
+
+def DFS (lst, a, b):
+  global times
+  if  [a,b]==[N-1,N-1]:
+    return 1
+  if times[a][b]==-1:
+    times[a][b]=0
+
+    a1,b1=a+lst[a][b],b
+    a2,b2=a,b+lst[a][b]
+
+  if 0<=a1<N and 0<=b<N:
+    times[a][b]+=DFS(lst, a1,b1)
+  if b2<N:
+    times[a][b]+=DFS(lst, a2, b2)
+  return times[a][b]
+
+print(DFS(lst,0,0))
