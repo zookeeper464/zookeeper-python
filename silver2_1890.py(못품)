@@ -1,29 +1,37 @@
 import sys
-input=sys.stdin.readline
+input = sys.stdin.readline
 
-N=int(input())
-lst=[]
-times=[]
-for i in range(N):
-  ls=list(map(int, input().split()))
-  lt=[-1]*N
-  lst.append(ls)
-  times.append(lt)
-
-def DFS (lst, a, b):
-  global times
-  if  [a,b]==[N-1,N-1]:
+#함수
+def dfs(x,y):
+  if x==n-1 and y==n-1:
     return 1
-  if times[a][b]==-1:
-    times[a][b]=0
+#입력된 값이 마지막 값이면 1로 출력
+#아니면 다음 실행
+  if dp[x][y]==-1:
+    dp[x][y]=0
+#처음 온 곳이 아니라면 return으로 넘어간다.
+#처음 온 곳이면 0으로 하여 시작
+    x1,y1=x+lst[x][y],y
+    x2,y2=x,y+lst[x][y]
+#x,y에서 오른쪽으로 아래로 이동한 좌표 설정(lst[x][y]값)
+    if 0<=x1<n and 0<=y1<n:
+      dp[x][y]+=dfs(x1, y1)
+#오른쪽으로 이동한 값이 인덱스 내부이면 해당 dp 인덱스에 기존 dp값을 추가해준다.
+    if 0<=x2<n and 0<=y2<n:
+      dp[x][y]+=dfs(x2, y2)
+#아래로 이동한 값이 인덱스 내부이면 해당 dp 인덱스에 기존 dp값을 추가해준다.
+  print("return", x, y)
+  return dp[x][y]
+#계속 수행하다가 결국 맨 마지막 인덱스에서 이동할 곳이 없는 곳에 도착한다면 return 값으로 dp[x][y]를 해준다.
+#return 값은 최종적으로 나오는 return 값으로 계산한다.
+# 최종적으로 나온는 부분은 0,0이다.
+#결국 맨 처음 넣은 x,y가 출력된다.
+#여기만 다르다고 볼 수 있는 부분이다.
 
-    a1,b1=a+lst[a][b],b
-    a2,b2=a,b+lst[a][b]
-
-  if 0<=a1<N and 0<=b<N:
-    times[a][b]+=DFS(lst, a1,b1)
-  if b2<N:
-    times[a][b]+=DFS(lst, a2, b2)
-  return times[a][b]
-
-print(DFS(lst,0,0))
+# 입력부
+n=int(input())
+lst=[list(map(int, input().split())) for i in range(n)]
+#계산용 리스트
+dp=[[-1]*n for i in range(n)]
+#함수 호출 및 출력
+print(dfs(0, 0))
