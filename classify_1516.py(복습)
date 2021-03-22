@@ -1,0 +1,40 @@
+from collections import deque, defaultdict
+
+n = int(input())
+dp = [0]*(n+1)
+cost = [0]*(n+1)
+rank = [0]*(n+1)
+q = deque()
+grp = defaultdict(list)
+#필요한 리스트와 변수들을 설정
+
+for i in range(n):
+  s = list(map(int, input().split()))
+  cost[i+1] = s[0]
+  
+  for j in s[1:-1]:
+    grp[j].append(i+1)
+    rank[i+1] += 1
+#cost에는 수치를 grp에는 다음에 필요한 건물의 번호를 삽입
+
+for i in range(n):
+  if rank[i+1] == 0:
+    q.append(i+1)
+    dp[i+1] += cost[i+1]
+# 아무 준비 없이 지을 수 있는 건물 비용 계산
+
+while q:
+  temp = q.popleft()
+  for i in grp[temp]:
+    rank[i] -= 1
+    dp[i] = max(dp[i], cost[i] + dp[temp])
+    # 현재 dp[i]와 "준비가 필요한 dp[temp]" + "현재 건물을 짓는 비용 cost[i]"를 비교하여 더 큰 값을 남긴다.
+    
+    if rank[i] == 0:
+      q.append(i)
+    # 준비가 완료된 건물 q에 추가
+
+for i in range(1,n+1):
+  print(dp[i])
+  
+#건물을 지을 수 없는 경우와 이 논리에 대한 복습 필요
