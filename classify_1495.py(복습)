@@ -1,0 +1,25 @@
+n,s,m = map(int,input().split())
+lst = list(map(int,input().split())) + [0]
+dp = [[0] * (m+1) for i in range(n+1)]
+#입력을 받고 각 시행마다 나올 수 있는 볼륨의 리스트 생성
+dp[0][s] = 1
+
+for i in range(n):
+  for j in range(m+1):
+    if dp[i][j] != 0:
+      if j - lst[i] > -1:
+        dp[i+1][j-lst[i]] = dp[i][j]
+      if j + lst[i] < m+1:
+        dp[i+1][j+lst[i]] = dp[i][j]
+  if dp[i] == [0]*(m+1):
+    break
+#각 상황마다 나올 수 있는 음량의 경우의 수 계산
+
+answer = 0
+for i in range(m+1):
+  if dp[-1][i] != 0:
+    answer = i
+if answer != 0:
+  print(answer)
+else:
+  print(-1)
