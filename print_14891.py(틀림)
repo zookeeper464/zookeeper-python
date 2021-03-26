@@ -1,0 +1,46 @@
+answer = []
+
+for i in range(4):
+  answer.append(list(map(int,list(input()))))
+
+def rotation (a, b):
+  global answer
+  if b == 1:
+    answer[a-1] = [answer[a-1][-1]] + answer[a-1][:-1]
+  elif b == -1:
+    answer[a-1] = answer[a-1][1:] + [answer[a-1][0]]
+
+def check (n):
+  lst = [n]
+  for i in range(2):
+    if answer[0][2] + answer[1][-2] ==1:
+      if 2 in lst and 1 not in lst:
+        lst.append(1)
+      elif 1 in lst and 2 not in lst:
+        lst.append(2)
+    if answer[1][2] + answer[2][-2] == 1:
+      if 2 in lst and 3 not in lst:
+        lst.append(3)
+      elif 3 in lst and 2 not in lst == 1:
+        lst.append(2)
+    if answer[2][2] + answer[3][-2] == 1:
+      if 3 in lst and 4 not in lst:
+        lst.append(4)
+      elif 4 in lst and 3 not in lst == 1:
+        lst.append(3)
+  return lst
+
+k = int(input())
+for i in range(k):
+  a,b = map(int,input().split())
+  for i in check(a):
+    rotation(i,b * ((-1) * (a-i)))
+
+sol = 0
+for i in range(4):
+  if answer[i][0] == 1:
+    sol += 2**i
+
+for i in answer:
+  print(i)
+print(sol)
