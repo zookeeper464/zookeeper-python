@@ -1,0 +1,20 @@
+import heapq
+#deque와 유사한 기능을 하는 함수 heapq와 popleft와 비슷한 기능을 하는 heappop 그리고 append와 유사한 기능을 하는 heappush가 존재하며 heap구조를 유지한다.
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+card_deck = []
+for _ in range(N):
+  heapq.heappush(card_deck, int(input()))
+#입력된 값을 heapq구조로 받는다.
+
+answer = 0
+while len(card_deck) > 1:
+  temp_1 = heapq.heappop(card_deck)
+  temp_2 = heapq.heappop(card_deck)
+  answer += temp_1 + temp_2
+  heapq.heappush(card_deck, temp_1 + temp_2)
+  #heapq구조 에서 가장 작은 2가지를 가져오고 그 값을 더하여 answer과 heapq구조에 더하고 넣는다.
+    
+print(answer)
