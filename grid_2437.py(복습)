@@ -1,0 +1,13 @@
+n = int(input())
+lst = list(map(int, input().split()))
+lst.sort()
+#필요한 입력값을 모두 넣고 정렬
+
+num = 1
+for i in range(n):
+  if num < lst[i]:
+    break
+  num += lst[i]
+# 나올 수 없는 수 num 계산
+
+print(num)
