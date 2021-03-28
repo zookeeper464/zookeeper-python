@@ -1,0 +1,36 @@
+import sys
+input = sys.stdin.readline
+
+n, k = map(int,input().split())
+dlst = []
+for i in range(n):
+  l = list(map(int,input().split()))
+  dlst.append(l)
+
+blst = []
+for i in range(k):
+  g = int(input())
+  blst.append(g)
+#필요한 입력값 모두 입력
+
+dlst.sort(key = lambda x : x[1], reverse = True)
+wlst = []
+clst = []
+for i in range(n):
+  wlst.append(dlst[i][0])
+  clst.append(dlst[i][1])
+blst.sort()
+visited = [False] * n
+# 연산에 필요한 리스트 정렬과 생성
+
+answer = 0
+for limit in blst:
+  for j in range(n):
+    if not visited[j]:
+      if wlst[j] <= limit:
+        visited[j] = True
+        answer += clst[j]
+        break
+#크기가 작은 가방부터 넣을 수 있는 가장 비싼 보석을 넣는다.        
+
+print(answer)
