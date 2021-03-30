@@ -1,0 +1,30 @@
+from collections import deque
+import sys
+input = sys.stdin.readline
+
+t = input().rstrip()
+p = input().rstrip()
+lst = list(p)
+m = len(p)
+check = p[-1]
+stack = []
+answer = 0
+sol = []
+q = deque(t[:m])
+#필요한 입력값 입력
+
+
+for idx, i in enumerate(t):
+  stack.append(i)
+  if idx >= m:
+    q.popleft()
+    q.append(i)
+  if i == check and list(q) == lst:
+    print(list(q))
+    answer += 1
+    sol.append(str(idx-m+2))
+    #p와 일치한다면 갯수를 추가하고 위치를 추가한다.
+
+print(sol, answer)
+print(answer)
+print(" ".join(sol))
