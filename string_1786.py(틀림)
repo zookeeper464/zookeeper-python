@@ -2,8 +2,8 @@ from collections import deque
 import sys
 input = sys.stdin.readline
 
-t = input().rstrip()
-p = input().rstrip()
+t = input().rstrip("\n")
+p = input().rstrip('\n')
 lst = list(p)
 m = len(p)
 check = p[-1]
@@ -19,7 +19,7 @@ for idx, i in enumerate(t):
   if idx >= m:
     q.popleft()
     q.append(i)
-  if i == check and list(q) == lst:
+  if idx >=m and i == check and list(q) == lst:
     print(list(q))
     answer += 1
     sol.append(str(idx-m+2))
