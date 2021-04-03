@@ -1,0 +1,81 @@
+#구조 뱀의 형태를 deque로 형성
+#뱀의 자리를 visited로 형성
+#방향 전환을 turn함수로 생성
+from collections import deque
+
+def turn (t):
+  global d
+  if t == "L":
+    d += 3
+    d %= 4
+  elif t == "D":
+    d += 1
+    d %= 4
+#회전 함수 생성
+
+def go ():
+  global q, visited, tm, x, y, d
+  dx = [1,0,-1,0]
+  dy = [0,1,0,-1]
+  tm += 1
+  x += dx[d]
+  y += dy[d]
+  print(x, y, tm, d)
+  q.append([x,y])
+  #시간을 진행시키고 뱀의 길이를 늘리는 구간
+
+  if x > n or y > n or x < 1 or y < 1:
+    sw =False
+    print("W")
+    return tm
+  # 벽에 부딪히면 종료하는 구간
+  
+  if not visited[y][x]:
+    p = q.popleft()
+    visited[p[1]][p[0]] = False
+  elif visited[y][x] == "A":
+    print("A")
+    pass
+  else:
+    sw = False
+    print("T", q)
+    return tm
+  visited[y][x] = True
+  #벽에 부딪히지 않을 때, 빈공간이거나 사과가 있거나 뱀의 꼬리가 있을 경우 구분
+  
+  try:
+    if tt[tm]:
+      print("회전")
+      turn(tt[tm])
+  except:
+    pass
+  #회전 해야 하는 시간이라면 회전
+  return False
+#시간마다 진행하는 함수
+
+n, k = int(input()), int(input())
+x, y, tm = 1, 1, 0
+visited = [[False] * (n+1) for i in range(n+1)]
+visited[1][1] = True
+q = deque([[0,0]])
+d = 0
+tt = {}
+#회전 등 기본 입력값 입력
+
+for i in range(k):
+  a, b = map(int,input().split())
+  visited[a][b] = "A"
+t = int(input())
+for i in range(t):
+  a, b = input().split()
+  tt[int(a)] = b
+#모든 입력 마무리
+
+sw = True
+while sw:
+  temp = go()
+  if temp:
+    print(temp)
+    break
+for i in visited:
+  print(i)
