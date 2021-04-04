@@ -1,0 +1,28 @@
+import sys
+input = sys.stdin.readline
+
+n, m = map(int,input().split())
+point = [i for i in range(n+1)]
+dp = [{i} for i in range(n+1)]
+answer = []
+#필요한 입력값 입력
+
+for i in range(m):
+  a, b, c = map(int,input().split())
+  if a == 0:
+    ma = max(b,c)
+    mi = min(b,c)
+    dp[point[mi]] = dp[point[mi]]|dp[point[ma]]
+    point[ma] = point[mi]
+    #a가 0이면 집합을 더해준다.
+
+  if a == 1:
+    mi = min(b,c)
+    if {b,c}&dp[point[mi]] == {b,c}:
+      answer.append("YES")
+    else:
+      answer.append("NO")
+    #a가 1이면 판별하여 출력 리스트에 넣어준다.
+
+for i in answer:
+  print(i)
