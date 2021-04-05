@@ -1,0 +1,30 @@
+import sys
+input = sys.stdin.readline
+
+n, m, k = map(int,input().split())
+lst = [0]
+answer = []
+dp = [0]
+#필요한 변수 호출
+
+for i in range(n):
+  temp = int(input())
+  lst.append(temp)
+  dp.append(temp+dp[-1])
+#주어진 변수에 따른 초기 설정값
+
+
+for i in range(m+k):
+  a, b, c = map(int,input().split())
+  if a == 1:
+    temp, lst[b] = c - lst[b], c
+    for i in range(b,n+1):
+      dp[i] += temp
+  #받은 변수가 1이면 lst의 원소를 변환
+
+  elif a == 2:
+    answer.append(dp[c]-dp[b-1])
+  #받은 변수가 2이면 리스트의 일부분 합 출력
+
+for i in answer:
+  print(i)
