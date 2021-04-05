@@ -1,0 +1,27 @@
+n, m = map(int,input().split())
+dp = [[] for i in range(n+1)]
+answer = []
+visited = [False] * (n+1)
+
+for i in range(m):
+  a, b = map(int,input().split())
+  dp[b].append(a)
+
+def deep (n):
+  global dp, answer
+  if dp[n] != [] and not visited[n]:
+    dp[n].sort()
+    for i in dp[n]:
+      deep(i)
+      visited[i] = True
+      answer.append(i)
+
+for i in range(1,n+1):
+  if not visited[i]:
+    deep(i)
+    answer.append(i)
+    visited[i] = True
+
+for i in range(n-1):
+  print(answer[i], end = " ")
+print(answer[n-1])
