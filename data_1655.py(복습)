@@ -1,0 +1,29 @@
+import sys
+import heapq
+input = sys.stdin.readline
+
+hax = []
+hin = []
+answer = []
+n = int(input())
+#필요한 변수 설정
+
+for i in range(n):
+  m = int(input())
+  if len(hax) == len(hin):
+    heapq.heappush(hin,-m)
+  else:
+    heapq.heappush(hax,m)
+  #hax,hin의 크기가 같다면 hin에 넣고 아니면 hax에 넣는다.
+
+  if hax and hax[0] + hin[0] < 0:
+    a, b = heapq.heappop(hax), heapq.heappop(hin)
+    heapq.heappush(hin, -1 * a)
+    heapq.heappush(hax, -1 * b)
+  #넣은 수가 hax에 넣어야 할지 hin에 넣어야 할지 결정
+
+  answer.append(-1 * hin[0])
+  #답 출력
+  
+for i in answer:
+  print(i)
