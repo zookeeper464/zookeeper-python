@@ -1,0 +1,44 @@
+import sys
+input = sys.stdin.readline
+
+g = int(input())
+p = int(input())
+lst = [False] * (g+1)
+lst[0] = True
+answer = 0
+x = False
+#필요한 변수 입력
+
+for i in range(p):
+  n = int(input())
+  #비행기 값 입력
+  if not lst[n]:
+    lst[n] = True
+    answer += 1
+  #도킹 가능하면 도킹
+  
+  else:
+    while True:
+      n -= 1
+    #아니면 이전 자리에 도킹가능한지 확인
+    
+      if n < 1:
+        x = True
+        break
+      #도킹 가능한 자리가 없다면 도킹 실패
+      
+      if not lst[n]:
+        lst[n] = True
+        answer += 1
+        break
+      #도킹 가능한 자리를 찾았다면 도킹
+      
+  if x:
+    break
+  #도킹 실패했다면 탈출
+  
+for j in range(i,p-1):
+  n = int(input())
+#도킹 탈출 이후 비행기 모음
+
+print(answer)
