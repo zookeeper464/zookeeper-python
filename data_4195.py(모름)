@@ -1,0 +1,38 @@
+import sys
+input = sys.stdin.readline
+
+def babo (lst, se):
+  global answer
+  temp = []
+  for i in range(len(lst)):
+    if lst[i]&se:
+      se = lst[i]|se
+     #교집합이 존재한다면 se를 둘의 합집합으로 변경
+     
+    else:
+      temp.append(lst[i])
+      #없다면 temp에 저장
+      
+  temp.append(se)
+  #마지막으로 se에 저장
+  
+  num = max(list(map(len,temp)))
+  answer.append(num)
+  #가장 큰 집합의 크기를 저장
+  return temp
+ #리스트와 입력값을 비교하여 교집합이 있다면 묶어서 저장
+
+n = int(input())
+answer = []
+for i in range(n):
+  m = int(input())
+  lst = []
+  for j in range(m):
+    se = set(input().split())
+    #입력해야 하는 값 입력
+    
+    lst = babo(lst,se)
+    #함수 실행
+    
+for i in answer:
+  print(i)
