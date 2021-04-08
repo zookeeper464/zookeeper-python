@@ -1,0 +1,53 @@
+import heapq
+import sys
+input = sys.stdin.readline
+
+lst = []
+answer = []
+n = int(input())
+for i in range(n):
+  m = int(input())
+  mst = []
+  Mst = []
+  num = 0
+  #필요한 변수 설정
+  
+  for j in range(m):
+    a,b = input().split()
+    b = int(b)
+    # 각 명령어 입력
+    
+    if a =="I":
+      heapq.heappush(mst, b)
+      heapq.heappush(Mst, -b)
+      num += 1
+    #입력하는 명령어 입력시 실행
+    
+    elif a == "D":
+      if num > 0:
+      #입력된 문자가 있을 경우
+      
+        num -= 1
+        if b >0:
+          heapq.heappop(Mst)
+        # 큰수를 빼야할때
+        
+        else:
+          heapq.heappop(mst)
+        #작은수를 빼야할때  
+        
+      else:
+        Mst, mst = [], []
+      #뺄 수가 없을 때 메모리 초기화하여 시간 줄이기
+      
+  if num > 0:
+    answer.append([(-1) * heapq.heappop(Mst),heapq.heappop(mst)])
+  else:
+    answer.append("EMPTY")
+  #입력해야 하는 부분 출력
+
+for i in answer:
+  if i == "EMPTY":
+    print(i)
+  else:
+    print(" ".join(map(str,i)))
