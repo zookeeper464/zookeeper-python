@@ -1,0 +1,23 @@
+n = int(input())
+answer = []
+lst = list(map(int,input().split()))
+temp = lst[:]
+temp.sort()
+#입력에 필요한 변수 입력
+
+for i in lst:
+  count = 0
+  t = temp.index(i)
+  #동일한 수가 나온 경우 index 차이를 만드는 수
+  while True:
+    if t + count in answer:
+      count += 1
+    #동일한 수가 나온다면 count를 하나 늘린다.
+    else:
+      break
+    #아니면 그대로 위치를 출력한다.
+
+  answer.append(t + count)
+  #count를 생각한 index입력
+  
+print(*answer)
