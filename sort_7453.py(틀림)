@@ -1,0 +1,27 @@
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+A, B, C, D = [], [], [], []
+answer = 0
+#필요한 변수 입력
+
+for _ in range(n):
+  a,b,c,d = map(int, input().split())
+  A.append(a); B.append(b); C.append(c); D.append(d)
+#필요한 리스트 생성
+
+hash_table = {}
+for a in A:
+  for b in B:
+    part = a + b
+    hash_table[part] = hash_table.get(part,0) + 1
+#앞에 두가지 리스트 계산
+
+for c in C:
+  for d in D:
+    part = -(c+d)
+    answer += hash_table.get(part,0)
+#뒤에 두가지 리스트 계산 값을 앞에 나온 결과와 비교
+
+print(answer)
