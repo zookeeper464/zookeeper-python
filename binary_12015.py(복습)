@@ -1,0 +1,22 @@
+import sys
+from bisect import bisect_left
+input = sys.stdin.readline
+#모듈 호출
+
+n = int(input())
+lst = list(map(int, input().split()))
+dp = [0]
+#필요한 변수 설정
+
+for i in lst:
+  if dp[-1] < i:
+    dp.append(i)
+  #dp의 값들 보다 더 크다면 맨 마지막에 추가
+
+  else:
+    dp[bisect_left(dp, i)] = i
+    #자신보다 큰 수 중 최솟값과 대체
+    
+  #dp의 내용들은 증가수열의 길이에 따라서 증가수열의 마지막 값 중 가장 작은 값으로 리워크 한다.
+
+print(len(dp)-1)
