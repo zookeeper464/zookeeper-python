@@ -1,0 +1,33 @@
+import sys, bisect
+input = sys.stdin.readline
+
+n, m = list(map(int,input().split()))
+lst = sorted([int(input()) for i in range(n)])
+#필요한 변수 입력
+
+start = 1
+end = max(lst) - min(lst)
+#이분탐색에 필요한 변수 설정
+
+while True:
+  mid = (start+end)//2
+  # 단위 거리로 배치할 수 있는 공유기 수 구하기
+  starter = lst[0]
+  idx = 0
+  count = 0
+  while idx < len(lst):
+    count+=1
+    idx = bisect.bisect_left(lst,lst[idx]+mid)
+    #lst에서 lst[idx]+mid의 왼쪽에 있는 인덱스 호출
+  #인덱스가 초과한다면 탈출 => 계속 더해서 len(lst)보다 커지면 아래 수행 
+
+  if count < m:
+    end = mid - 1
+  elif count >= m:
+    start = mid +1
+  if mid == end:
+    print(mid)
+    break
+  #세봤더니 m보다 작다면 더 작게 바꾼다.
+  #세봤더니 m보다 크다면 더 크게 바꾼다.
+  #맞으면 탈출
