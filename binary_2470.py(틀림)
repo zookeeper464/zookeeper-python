@@ -1,0 +1,52 @@
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+lst = list(map(int,input().split()))
+lst1 = []
+lst2 = []
+for i in lst:
+  if i>0:
+    lst1.append(i)
+  else:
+    lst2.append(i)
+
+lst1.sort(reverse = True)
+lst2.sort()
+#판별하기 위한 설정
+
+i, j = 0, 0
+if lst1 == []:
+  answer = [lst2[-2],lst2[-1]]
+elif lst2 == []:
+  answer = [lst1[-1],lst1[-2]]
+#둘 중 하나라도 빈 리스트면 탈출
+
+else:
+  answer = [lst2[0],lst1[0]]
+  #처음 답을 설정
+    
+  while True:
+    if i == len(lst1) or j == len(lst2):
+      break
+    #만약 탐색을 모두 마쳤으면 탈출(이 뒤엔 항상 더 큰값만 존재)
+    
+    mid = lst1[i] +lst2[j]
+    if mid > 0:
+      if abs(sum(answer)) > abs(mid):
+        answer = [lst2[j],lst1[i]]
+      i += 1
+    #mid와 answer의 절댓값을 비교하여 answer,i 수정
+    elif mid <0:
+      if abs(sum(answer)) > abs(mid):
+        answer = [lst2[j],lst1[i]]
+      j += 1
+    #mid와 answer의 절댓값을 비교하여 answer,j 수정
+    else:
+      mid = 0
+      answer = [lst2[j],lst1[i]]
+      break
+    #두 수가 같다면 0이므로 탈출
+    
+for i in answer:
+  print(i, end = " ")
