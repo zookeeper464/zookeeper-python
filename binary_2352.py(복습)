@@ -1,0 +1,20 @@
+import sys
+from bisect import bisect_left
+input = sys.stdin.readline
+#모듈 호출
+
+n = int(input())
+lst = list(map(int, input().split()))
+dp = [0]
+#필요한 변수 설정
+
+for i in lst:
+  if dp[-1] < i:
+    dp.append(i)
+  #dp의 값들 보다 더 크다면 맨 마지막에 추가
+
+  else:
+    dp[bisect_left(dp, i)] = i
+  #dp 추가에 대한 모순
+
+print(len(dp)-1)
