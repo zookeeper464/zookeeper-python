@@ -1,0 +1,36 @@
+import sys
+input = sys.stdin.readline
+
+n, m = map(int,input().split())
+lst = [[] for i in range(n+1)]
+weight = [0 for i in range(n+1)]
+answer = 0
+
+for i in range(m):
+  x, y, c = map(int,input().split())
+  lst[x].append((y,c))
+  lst[y].append((x,c))
+
+start, end = map(int,input().split())
+
+def check (s, depth):
+  global start, end, weight, answer
+  depth += 1
+  if depth == n:
+    return False
+  for e, wt in lst[s]:
+    if wt < answer:
+      return False
+    if weight[s] == 0: w = wt
+    else: w = min(weight[s],wt)
+    if e == start:
+      pass
+    elif e == end:
+      answer = max(answer,w)
+      return True
+    else:
+      weight[e] = max(w,weight[e])
+      check(e,depth)
+
+check(start,0)
+print(answer)
