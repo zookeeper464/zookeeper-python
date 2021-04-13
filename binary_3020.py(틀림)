@@ -1,0 +1,25 @@
+import sys
+from collections import Counter as ct
+input = sys.stdin.readline
+
+n, h = map(int,input().split())
+lst1 = []
+for i in range(n//2):
+  lst.append(int(input()))
+  lst.append(int(input())-h)
+dic = ct(lst)
+#필요한 변수 모두 입력
+
+hlst = [n//2 for i in range(h)]
+for i, num in dic.items():
+  if i > 0:
+    for j in range(i):
+      hlst[j] += num
+  if i < 0:
+    for j in range(-i):
+      hlst[j] -= num
+  #조건에 맞춰서 장애물 갯수 증가, 감소
+
+temp = min(hlst)
+print(temp, end = " ")
+print(hlst.count(temp))
