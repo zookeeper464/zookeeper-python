@@ -1,0 +1,111 @@
+import sys
+from collections import deque
+input = sys.stdin.readline
+
+n, m = map(int,input().split())
+lst = []
+for i in range(n):
+  lst.append(list(input().rstrip()))
+#필요한 입력값 입력
+
+dx = [1, 0, -1, 0]
+dy = [0, 1, 0, -1]
+count = 0
+s1 = True
+for idx, i in enumerate(lst):
+  for idex, j in enumerate(i):
+    if j == "B": blue = deque([[idx, idex]])
+    elif j == "R": red = deque([[idx, idex]])
+#설정이 필요한 변수 입력
+
+while blue and red:
+  s = True
+  if not s1:
+    break
+  if count == 11:
+    count = -1
+    break
+  #반복문을 10번 돌렸다면 탈출
+  count += 1
+  #반복한 횟수
+
+  for l in range(len(blue)):
+    bemp = blue.popleft()
+    remp = red.popleft()
+    #현재 q의 길이만큼 실행한다.
+
+    for i in range(4):
+      j,k = 0,0
+      bx, by = bemp[0], bemp[1]
+      rx, ry = remp[0], remp[1]
+      #4개 방향에 대해서 새로운 좌표를 설정한다.
+      s = True
+      temp = False
+      n = 0
+      while lst[bx][by] != "#":
+        #현재 위치가 #이 아니라면 다음을 반복한다.
+
+        if lst[bx][by] == "O":
+          s = False
+          break
+          #현재 위치가 O이면 q에 넣지 않아도 된다.
+        
+        else:
+          if lst[bx][by] == "R":
+            temp = True
+          #현재 위치가 R이면 R을 생각해서 나중에 뒤로 한칸 물러선다.
+          bx += dx[i]
+          by += dy[i]
+          #그 다음 위치로 넘어간다.
+      
+      bx -= dx[i]
+      by -= dy[i]
+
+      if temp:
+        bx -= dx[i]
+        by -= dy[i]
+        #만약 가는길에 다른 공이 있다면 위치를 한칸 뒤로 옮긴다.
+
+      temp = False
+      n = 0
+      while lst[rx][ry] != "#":
+        n += 1
+        if n == 10:
+          break
+        #현재 위치가 #이 아니라면 다음을 반복한다.
+
+        if lst[rx][ry] == "O" and s:
+          s1 = False
+          break
+          #현재 위치가 O이면 전체 while문을 탈출한다..
+        
+        else:
+          if lst[rx][ry] == "B":
+            temp = True
+          #현재 위치가 B이면 B을 생각해서 나중에 뒤로 한칸 물러선다.
+
+          rx += dx[i]
+          ry += dy[i]
+          #그 다음 위치로 넘어간다.
+
+      rx -= dx[i]
+      ry -= dy[i]
+
+      if temp:
+        rx -= dx[i]
+        ry -= dy[i]
+        #만약 가는길에 다른 공이 있다면 위치를 한칸 뒤로 옮긴다.
+
+      if s and [bx,by,rx,ry] != bemp+remp:
+        if [rx,ry] not in red or [bx,by] not in blue:
+          blue.append([bx,by])
+          red.append([rx,ry])
+          #만약 파란공이 도착한다면 q에 넣지 않는다.
+
+  print(red)
+  print(blue)
+  print()
+if s:
+  print(count)
+else:
+  print(-1)
