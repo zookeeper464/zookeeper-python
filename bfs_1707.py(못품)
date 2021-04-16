@@ -1,0 +1,45 @@
+import sys
+from collections import deque
+input = sys.stdin.readline
+
+t = int(input())
+sol = []
+
+for i in range(t):
+  answer = "YES"
+  tlst = [[],[]]
+  s = True
+  q1 = deque()
+  q2 = deque()
+  v, e = map(int,input().split())
+  elst = [[] for i in range(v+1)]
+  visited = [False for i in range(v+1)]
+  for j in range(e):
+    a, b = map(int,input().split())
+    elst[a].append(b)
+    elst[b].append(a)
+  #필요한 입력값 입력
+
+  for j in range(1, v+1):
+    if not visited[j]:
+      q1.append(j)
+      #만약 j가 위 tlst에 포함되지 않았다면 실행
+
+      while q1:
+        #q1이 존재하면 실행
+        for k in range(len(q1)):
+          #현재 q1이 가진 모든 원소들로 실행
+          temp = q1.popleft()
+          tlst[0].append(temp)
+          visited[temp] = True
+          #여기서 체크해야 하는 상황
+          #1. q1과 q2가 교집합이 없어야 한다. - q1에서 꺼낸 수들을 따로 모아야 한다. - tlst를 이용한다.
+          for l in elst[temp]:
+            if not visited[l]:
+              visited[l] = True
+              q2.append(l)
+
+  sol.append(elst)
+  sol.append(visited)
+for i in sol:
+  print(i)
