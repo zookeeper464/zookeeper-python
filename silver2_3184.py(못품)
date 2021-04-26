@@ -1,0 +1,34 @@
+import sys
+from collections import deque
+input = sys.stdin.readline
+
+dx, dy = [1,0,-1,0], [0,1,0,-1]
+r, c = map(int,input().split())
+answer = [0, 0]
+lst = []
+for i in range(r):
+  lst.append(list(input().rstrip()))
+
+for i in range(r):
+  for j in range(c):
+    if lst[i][j] == "v" or lst[i][j] == "o":
+      q = deque([[i,j]])
+      check = [0,0]
+      while q:
+        for l in range(len(q)):
+          temp = q.popleft()
+          if "v" == lst[temp[0]][temp[1]]:
+            check[1] += 1
+          elif "o" == lst[temp[0]][temp[1]]:
+            check[0] += 1
+          lst[temp[0]][temp[1]] = "#"
+          for k in range(4):
+            x, y = temp[0]+dx[k], temp[1]+dy[k]
+            if 0<=x<r and 0<=y<c and lst[x][y] != "#":
+              q.append([x,y])
+      if check[0] > check[1]:
+        answer[0] += check[0]
+      else:
+        answer[1] += check[1]
+
+print(" ".join(map(str,answer)))
