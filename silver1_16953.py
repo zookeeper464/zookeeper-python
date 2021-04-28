@@ -2,7 +2,7 @@ a,b = map(int,input().split())
 #입력값 처리
 
 cnt = 1
-#카운트 설정
+#출력값 설정
 
 while b != a:
   #b를 a로 만들기 위한 반복문 설정
