@@ -1,0 +1,39 @@
+from collections import deque
+
+n, m, k = map(int,input().split())
+lst = [[0 for i in range(m)] for _ in range(n)]
+for i in range(k):
+  a, b = map(int,input().split())
+  lst[a-1][b-1] = 1
+#입력 처리
+
+dx,dy = [1,0,-1,0], [0,1,0,-1]
+cnt,c = 0, 1
+#변수 처리
+
+for i in range(n):
+  for j in range(m):
+    #탐색 시작
+
+    if lst[i][j] == 1:
+      q = deque([[i,j]])
+      lst[i][j] = 0
+      c = 1
+      #음식물 쓰레기 발견시 변수 처리
+
+      while q:
+        temp = q.popleft()
+        for k in range(4):
+          x, y = temp[0]+dx[k], temp[1]+dy[k]
+          if 0<=x<n and 0<=y<m and lst[x][y]==1:
+            #주변의 음식물 쓰레기 탐색
+
+            lst[x][y] = 0
+            q.append([x,y])
+            c += 1
+            #음식물 쓰레기 발견 후 처리
+
+    cnt = max(cnt,c)
+    #음식물쓰렉 최대 크기 저장
+
+print(cnt)
