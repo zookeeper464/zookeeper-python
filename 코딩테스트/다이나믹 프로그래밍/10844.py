@@ -7,4 +7,4 @@ for i in range(1,n):
   for j in range(1,9):
     lst[j] = temp[j-1]+temp[j+1]
   temp = lst[:]
-print(sum(lst))
+print(sum(lst)%1000000000)
