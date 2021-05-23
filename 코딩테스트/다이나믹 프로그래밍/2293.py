@@ -1,4 +1,4 @@
-n,k = map(int,input().split())
+n, k = map(int,input().split())
 
 dp = [0 for _ in range(k+1)]
 dp[0] = 1
