@@ -1,13 +1,13 @@
 n = int(input())
-dp = [n+1 for _ in range(n+1)]
-lst = [i**2 for i in range(1, int(n**0.5)+1)]
-for i in lst:
-  dp[i] = 1
-
-for i in range(2,n+1):
-  if dp[i] == n+1:
-    for j in lst:
-      if j<i and dp[i]>dp[i-j]+1:
-        dp[i]=dp[i-j]+1
-
-print(dp[n])
+m = int(n**0.5)
+dp = [0 for _ in range(n+1)]
+for i in range(m):
+  temp = (m-i)*(m-i)
+  dp[temp] = 1
+  for idx,v in enumerate(dp):
+    if v != 0 and idx+temp<n+1:
+      if dp[idx+temp] == 0:
+        dp[idx+temp] = v+1
+      else:
+        dp[idx+temp] = min(v+1,dp[idx+temp])
+print(dp[-1])
