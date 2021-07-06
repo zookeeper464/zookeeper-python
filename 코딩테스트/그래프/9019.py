@@ -32,7 +32,7 @@ for _ in range(t):
       lst[x2] = temp+"L"
       q.append(str(x2))
 
-    if lst[b]:
+    if lst[b]: 
       break
   
   answer.append(lst[b])
