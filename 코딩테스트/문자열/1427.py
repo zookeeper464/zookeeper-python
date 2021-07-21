@@ -1,0 +1,5 @@
+s = list(input())
+s.sort(reverse=True)
+n = ''.join(s)
+n = int(n)
+print(n)
