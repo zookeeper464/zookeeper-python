@@ -5,7 +5,6 @@ lst.sort()
 num = 1
 for i in range(n):
   if num < lst[i]:
+    print(num)
     break
   num += lst[i]
-
-print(num)
