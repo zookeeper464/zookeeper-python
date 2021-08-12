@@ -1,7 +1,3 @@
-import sys
-input = sys.stdin.readline
-sys.setrecursionlimit(10000)
-
 m,n=map(int,input().split())
 lst=[list(map(int, input().split())) for i in range(m)]
 dp=[[-1]*n for i in range(m)]
