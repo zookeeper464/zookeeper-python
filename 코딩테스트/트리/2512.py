@@ -1,21 +1,20 @@
-n,m = map(int,input().split())
-lst = sorted([int(input()) for _ in range(n)])
+n = int(input())
+lst = list(map(int,input().split()))
+m = int(input())
 mx,mn = max(lst),0
 
 while mx>=mn:
-  cnt = 1
-  temp = lst[0]
-  num = (mx+mn)//2
-  for i in range(1,n):
-    if lst[i] - temp >= num:
-      cnt += 1
-      temp = lst[i]
-      if cnt == m:
-        break
+  mid = (mx+mn)//2
+  num = 0
+  for i in lst:
+    if i>mid:
+      num += mid
+    else:
+      num += i
   
-  if cnt < m:
-    mx = num-1
+  if num>m:
+    mx = mid-1
   else:
-    mn = num+1
+    mn = mid+1
 
 print(mx)
