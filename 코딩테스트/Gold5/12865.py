@@ -1,17 +1,17 @@
-n,k = map(int,input().split())
-lst = [list(map(int,input().split())) for _ in range(n)]
-answer = 0
+n,k=map(int,input().split())
+dp=[[0]*(k+1) for i in range(n + 1)]
+w=[0]
+v=[0]
+for i in range(n):
+  w_,v_=map(int, input().split())
+  w.append(w_)
+  v.append(v_)
 
-def dfs (wei,idx,temp):
-  global answer
-  s = 0
-  for i in range(idx+1,n):
-    if wei+lst[i][0]>k:
-      s = 1
+for i in range(1,n + 1):
+  for j in range(k,0,-1):
+    if j-w[i]>=0:
+      dp[i][j]=max(dp[i-1][j],v[i]+dp[i-1][j-w[i]])
     else:
-      dfs(wei+lst[i][0],i,temp+lst[i][1])
-  if s: 
-    answer = max(answer,temp)
+      dp[i][j]=dp[i-1][j]
 
-dfs(0,-1,0)
-print(answer)
+print(max(dp[n]))
