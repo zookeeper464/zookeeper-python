@@ -131,10 +131,13 @@
 # 정렬되지 않은 상태로 입력받을 수 있는 경우가 없다.
 
 # 10093
-# a,b = map(int,input().split())
-# m,M = min(a,b),max(a,b)
-# print(M-m-1)
-# print(*list(range(m+1,M)))
+# m,M = sorted(list(map(int,input().split())))
+
+# if m == M:
+#   print(0, '\n')
+# else:
+#   print(M-m-1)
+#   print(*list(range(m+1,M)))
 
 # 13458
 # from math import ceil
