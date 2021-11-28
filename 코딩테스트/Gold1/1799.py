@@ -60,3 +60,38 @@
 
 # dfs(-1,0,0,0)
 # print(answer)
+######################################################################## 틀린 코드들
+
+n = int(input())
+chess = [list(map(int,input().split())) for _ in range(n)]
+white,black = [], []
+for r in range(n):
+    for c in range(n):
+        if chess[r][c] == 1:
+            if (r+c)%2:
+                black.append([r,c])
+            else:
+                white.append([r,c])
+
+def check(idx,rr,ll,cnt,lst):
+    global temp
+    l = len(lst)
+
+    for i in range(idx+1,l):
+        idx1,idx2 = lst[i][0]+lst[i][1],lst[i][0]+(l-1)-lst[i][1]
+        if (rr>>idx1)%2 or (ll>>idx2)%2:
+            continue
+
+        check(i,rr|(1<<idx1),ll|(1<<idx2),cnt+1,lst)
+    
+    if cnt>temp:
+        temp = cnt
+
+answer = 0
+temp = 0
+check(-1,0,0,0,white)
+answer += temp
+temp = 0
+check(-1,0,0,0,black)
+answer += temp
+print(answer)
