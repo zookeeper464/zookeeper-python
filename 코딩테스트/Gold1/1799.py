@@ -75,15 +75,16 @@ for r in range(n):
 
 def check(idx,rr,ll,cnt,lst):
     global temp
+    x = 2*n-1
     l = len(lst)
 
     for i in range(idx+1,l):
-        idx1,idx2 = lst[i][0]+lst[i][1],lst[i][0]+(l-1)-lst[i][1]
+        idx1,idx2 = (lst[i][0]+lst[i][1]),(lst[i][0]+(x-lst[i][1]))
         if (rr>>idx1)%2 or (ll>>idx2)%2:
             continue
 
         check(i,rr|(1<<idx1),ll|(1<<idx2),cnt+1,lst)
-    
+        
     if cnt>temp:
         temp = cnt
 
