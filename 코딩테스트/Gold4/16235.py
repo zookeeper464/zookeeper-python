@@ -95,8 +95,11 @@ def step124(): #봄+여름+겨울
 
                 else:
                     temp += (num>>1)
+                    break
             
-            tree[r][c] = lst[:]
+            temp += sum([i//2 for i in tree[r][c]])
+            
+            tree[r][c] = lst
             earth[r][c] = cnt+temp+mat[r][c]
 
 def step3(): #가을
@@ -123,3 +126,5 @@ for _ in range(k):
     step()
 
 print(check())
+############################## 시간초과
+# dictionary를 통해 나무 크기에 따른 정리를 한다면 해결 가능할 것으로 보인다.
