@@ -66,57 +66,50 @@ n,m,k = map(int,input().split())
 mat = [list(map(int,input().split())) for _ in range(n)]
 earth = [[5]*n for _ in range(n)]
 tree = [[[] for _ in range(n)] for _ in range(n)]
-size = [[[] for _ in range(n)] for _ in range(n)]
+size = [[0]*n for _ in range(n)]
 dr,dc = [1,1,1,0,0,-1,-1,-1],[1,0,-1,1,-1,1,0,-1]
 
 for _ in range(m):
     x,y,z = map(int,input().split())
     heappush(tree[x-1][y-1],z)
-    size[x-1][y-1].append(z//5)
+    if z%5==0:
+        size[x-1][y-1] += 1
 
 def step():
-    step12()
-    print(*tree,sep='\n')
-    print()
-    print(*earth,sep='\n')
-    print()
+    step124()
     step3()
-    step4()
 
-def step12(): #봄+여름
+def step124(): #봄+여름+겨울 
+    # 여기가 항상 틀려요~
     for r in range(n):
         for c in range(n):
-            lst,temp,cnt,size[r][c] = [],0,earth[r][c],[]
-            for i in range(len(tree[r][c])):
+            lst,temp,cnt,size[r][c] = [],0,earth[r][c],0
+
+            for _ in range(len(tree[r][c])):
                 num = heappop(tree[r][c])
                 if cnt >= num:
                     cnt -= num
                     heappush(lst,num+1)
-                    if (num+1)//5:
-                        size[r][c].append((num+1)//5)
+                    if (num+1)%5==0:
+                        size[r][c] += 1
+
                 else:
-                    temp += num
-                    break
-            temp += sum(tree[r][c])
+                    temp += (num>>1)
+            
             tree[r][c] = lst[:]
-            earth[r][c] = cnt+temp//5
+            earth[r][c] = cnt+temp+mat[r][c]
 
 def step3(): #가을
     for r in range(n):
         for c in range(n):
-            if size[r][c] == []:
+            if size[r][c] == 0:
                 continue
-            for s in size[r][c]:
-                for i in range(8):
-                    nr,nc = r+dr[i],c+dc[i]
-                    if 0<=nr<n and 0<=nc<n:
-                        heappush(tree[nr][nc],s)
-                    
 
-def step4(): #겨울
-    for r in range(n):
-        for c in range(n):
-            earth[r][c] += mat[r][c]
+            for i in range(8):
+                nr,nc = r+dr[i],c+dc[i]
+                if 0<=nr<n and 0<=nc<n:
+                    for _ in range(size[r][c]):
+                        heappush(tree[nr][nc],1)
 
 def check():
     answer = 0
