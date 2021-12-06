@@ -128,7 +128,25 @@
 # print(answer)
 
 # 15719
-# 정렬되지 않은 상태로 입력받을 수 있는 경우가 없다.
+# 데이터를 몇개 받는지가 가장 중요한 포인트이다.
+# import sys
+# n = int(input())
+# answer = -(n*(n-1))//2
+# temp = ''
+# while 1:
+#     s = sys.stdin.read(1)
+#     if s == '\n':
+#         answer += int(temp)
+#         break
+
+#     elif s == ' ':
+#         answer += int(temp)
+#         temp = ''
+#     else:
+#         temp += s
+
+# print(answer)
+        
 
 # 10093
 # m,M = sorted(list(map(int,input().split())))
