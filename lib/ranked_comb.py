@@ -8,7 +8,7 @@ def nonrepeats_comb(num,idx):
   global answer_list, input_list, temp_list, N
   
   if (num == N):
-    answer_list.append(" ".join(temp_list)
+    answer_list.append(" ".join(temp_list))
     return 
   
   for i in range(idx+1,len(input_list)):
