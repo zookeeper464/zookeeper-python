@@ -1,10 +1,8 @@
-class node:
-  def __init__(self,data):
-    self.data = data
-    self.left = None
-    self.right = None
+class Node(object):
+    def __init__(self, name,data):
+        self.name = name
+        self.data = data
+        self.child = []
 
-    
-class tree:
-  def __init__(self,root):
-    self.root = root
+    def add(self, obj):
+        self.child.append(obj)
