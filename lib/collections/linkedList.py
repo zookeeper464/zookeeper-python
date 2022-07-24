@@ -36,7 +36,7 @@ class LinkedList:
             return
         node = self.get(index - 1)
         if node is None or node.next is None:
-            print("linkedList length is shorter than index")
+            print("length of linkedList is shorter than index")
             return
         next_node = node.next
         node.next = new_node
@@ -48,7 +48,7 @@ class LinkedList:
             return
         node = self.get(index-1)
         if node is None or node.next is None:
-            print("linkedList length is shorter than index")
+            print("length of linkedList is shorter than index")
             return
         node.next = node.next.next
 
