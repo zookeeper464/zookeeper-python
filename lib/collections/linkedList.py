@@ -1,13 +1,21 @@
 class LinkedList:
     def __init__(self, data):
         self.head = Node(data)
-        self.last = Node(data)
 
     def append(self, data):
-        cur = self.last
+        cur = self.head
+        while cur is not None:
+            cur = cur.next
         cur.next = Node(data)
-        self.last = cur.next
-        self.last.prev = cur
+
+    def pop(self):
+        cur = self.head
+        if cur.next is not None:
+            while cur.next.next is not None:
+                cur = cur.next
+        temp = cur.next
+        cur.next = None
+        return temp
 
     def contains(self, data):
         cur = self.head
@@ -51,10 +59,3 @@ class LinkedList:
             print("length of linkedList is shorter than index")
             return
         node.next = node.next.next
-
-
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-        self.prev = None
