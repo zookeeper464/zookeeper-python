@@ -2,6 +2,14 @@ class LinkedList:
     def __init__(self, data):
         self.head = Node(data)
 
+    def size(self):
+        cur = self.head
+        num = 0
+        while cur is not None:
+            cur = cur.next
+            num += 1
+        return num
+
     def append(self, data):
         cur = self.head
         while cur is not None:
@@ -59,3 +67,9 @@ class LinkedList:
             print("length of linkedList is shorter than index")
             return
         node.next = node.next.next
+
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
